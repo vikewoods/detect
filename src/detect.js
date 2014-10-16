@@ -15,9 +15,11 @@
     if ( /MSIE/.test(ua) ) {
         
         browser = 'Internet Explorer';
+        document.getElementsByTagName('body')[0].className+= 'ie';
         
         if ( /IEMobile/.test(ua) ) {
             mobile = 1;
+            document.getElementsByTagName('body')[0].className+= 'ie-mobile';
         }
         
         version = /MSIE \d+[.]\d+/.exec(ua)[0].split(' ')[1];
@@ -26,16 +28,19 @@
         // Platform override for Chromebooks
         if ( /CrOS/.test(ua) ) {
             platform = 'CrOS';
+            document.getElementsByTagName('body')[0].className+= 'chrome-os';
         }
 
         browser = 'Chrome';
         version = /Chrome\/[\d\.]+/.exec(ua)[0].split('/')[1];
+        document.getElementsByTagName('body')[0].className+= 'chrome';
         
     } else if ( /Opera/.test(ua) ) {
         
         browser = 'Opera';
-        
+        document.getElementsByTagName('body')[0].className+= 'opera'
         if ( /mini/.test(ua) || /Mobile/.test(ua) ) {
+            document.getElementsByTagName('body')[0].className+= 'opera-mobile';
             mobile = 1;
         }
         
@@ -45,22 +50,27 @@
         mobile = 1;
         os = /Android\s[\.\d]+/.exec(ua)[0];
         
+        document.getElementsByTagName('body')[0].className+= 'andorid-webkit'
+        
     } else if ( /Firefox/.test(ua) ) {
         
         browser = 'Firefox';
+        document.getElementsByTagName('body')[0].className+= 'firefox'
         
         if ( /Fennec/.test(ua) ) {
             mobile = 1;
+            document.getElementsByTagName('body')[0].className+= 'fennec-os'
         }
         version = /Firefox\/[\.\d]+/.exec(ua)[0].split('/')[1];
         
     } else if ( /Safari/.test(ua) ) {
         
         browser = 'Safari';
-        
+        document.getElementsByTagName('body')[0].className+= 'safari';
         if ( (/iPhone/.test(ua)) || (/iPad/.test(ua)) || (/iPod/.test(ua)) ) {
             os = 'iOS';
             mobile = 1;
+            document.getElementsByTagName('body')[0].className+= 'ios-os'
         }
         
     }
@@ -83,17 +93,23 @@
         if ( /[\_]/.test(osversion) ) {
             osversion = osversion.split('_').join('.');
         }
+        document.getElementsByTagName('body')[0].className+= 'mac-os';
     } else if ( platform === 'CrOS' ) {
         os = 'ChromeOS';
+        document.getElementsByTagName('body')[0].className+= 'chrome-os';
     } else if ( platform === 'Win32' || platform == 'Win64' ) {
         os = 'Windows';
         bit = platform.replace(/[^0-9]+/,'');
+        document.getElementsByTagName('body')[0].className+= 'win-os';
     } else if ( !os && /Android/.test(ua) ) {
         os = 'Android';
+        document.getElementsByTagName('body')[0].className+= 'android-os';
     } else if ( !os && /Linux/.test(platform) ) {
         os = 'Linux';
+        document.getElementsByTagName('body')[0].className+= 'linux-os';
     } else if ( !os && /Windows/.test(ua) ) {
         os = 'Windows';
+        document.getElementsByTagName('body')[0].className+= 'win-os';
     }
 
     window.ui = {
